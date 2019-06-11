@@ -4,6 +4,10 @@ MAINTAINER suculent
 
 USER root
 
+RUN apt-get update \
+    && apt-get install -y python-serial python3-serial \
+    && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
+
 RUN curl https://downloads.arduino.cc/arduino-1.8.9-linux64.tar.xz > ./arduino-1.8.9-linux64.tar.xz \
  && unxz ./arduino-1.8.9-linux64.tar.xz \
  && tar -xvf arduino-1.8.9-linux64.tar \
