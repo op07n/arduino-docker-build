@@ -1,5 +1,8 @@
-FROM ubuntu
+FROM gitpod/workspace-full-vnc
+
 MAINTAINER suculent
+
+USER root
 
 RUN apt-get update && apt-get install -y -f software-properties-common \
   && add-apt-repository ppa:openjdk-r/ppa \
@@ -36,15 +39,14 @@ RUN mkdir -p /opt/arduino/hardware/espressif \
  && cd esp32 \
  && git submodule update --init --recursive \
  && cd tools \
- && python get.py
+ && python get.py && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN cd /opt/arduino/hardware/espressif \
-  && git clone https://github.com/esp8266/Arduino.git esp8266 \
-  && cd esp8266 \
-  && git checkout tags/2.5.0 \
-  && cd ./tools \
-  && python get.py \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# RUN cd /opt/arduino/hardware/espressif \
+#   && git clone https://github.com/esp8266/Arduino.git esp8266 \
+#   && cd esp8266 \
+#   && git checkout tags/2.5.0 \
+#   && cd ./tools \
+#   && python get.py #   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add boards manager URL (warning, mismatch in boardsmanager vs. boards_manager in 2.6.0 coming up)
 RUN /opt/arduino/arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs \
