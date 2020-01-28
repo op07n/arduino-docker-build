@@ -13,11 +13,11 @@ RUN apt-get -y update && \
 RUN pip2 install pyserial
 RUN pip3 install pyserial
 
-RUN curl https://downloads.arduino.cc/arduino-1.8.9-linux64.tar.xz > ./arduino-1.8.9-linux64.tar.xz \
- && unxz ./arduino-1.8.9-linux64.tar.xz \
- && tar -xvf arduino-1.8.9-linux64.tar \
- && rm -rf arduino-1.8.9-linux64.tar \
- && mv ./arduino-1.8.9 /opt/arduino \
+RUN curl https://downloads.arduino.cc/arduino-1.8.11-linux64.tar.xz > ./arduino-1.8.11-linux64.tar.xz \
+ && unxz ./arduino-1.8.11-linux64.tar.xz \
+ && tar -xvf arduino-1.8.11-linux64.tar \
+ && rm -rf arduino-1.8.11-linux64.tar \
+ && mv ./arduino-1.8.11 /opt/arduino \
  && cd /opt/arduino \
  && ./install.sh
 
